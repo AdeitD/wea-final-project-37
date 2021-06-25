@@ -32,7 +32,7 @@ Misc.
 
 ---
 
-    Endpoints
+    REST Endpoints
 
 ---
 
@@ -47,3 +47,29 @@ Gets a grocery by its name
 
 Display all groceries with a given category
 /groceries/{category}
+
+---
+
+    GraphQL Type Definitions
+
+---
+
+
+```
+type Query {
+    grocery(id: ID, name: String): Grocery
+    groceries(category: String): [Grocery]
+}
+type Grocery {
+    id: ID
+    name: String
+    category: String
+}
+```
+Notice that none of the Query types require any of their parameters. The grocery Query is intended to take one parameter.
+
+The grocery Query will ignore the name parameter if it finds an id parameter. It will return an error if there are no parameters. Otherwise, it will return whatever it gets from the REST API: either a Grocery or an error.
+
+The groceries Query will return whatever it gets from the REST API: either a (possibly empty) list of Grocery objects or an error.
+
+Mutation types will be added later.
