@@ -8,6 +8,7 @@ import {
 import Home from "./components/Home";
 import Start from "./components/Start";
 import Browse from "./components/Browse";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 
