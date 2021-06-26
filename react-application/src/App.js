@@ -5,7 +5,11 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Home from "./components/Home";
+import Start from "./components/Start";
+import Browse from "./components/Browse";
 import './App.css';
+
 
 function App() {
   return (
@@ -45,30 +49,6 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function Start() {
-  return (
-    <div>
-      <h2>Get Started</h2>
-    </div>
-  );
-}
-
-function Browse() {
-  return (
-    <div>
-      <h2>Browse</h2>
-    </div>
   );
 }
 
