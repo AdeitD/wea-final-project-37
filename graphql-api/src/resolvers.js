@@ -1,30 +1,39 @@
-const { API_URL, fetchJsonOrErr } = require('./utilities');
+const { API_URL, fetchPromiseJsonOrErr } = require('./utilities');
 
 const Query = {
-    grocery: (parent, args, context, info) => {
+    grocery: async (parent, args, context, info) => {
         const { id, name } = args;
+        const { loaders } = context;
         if (id) {
-            return fetchJsonOrErr(`${API_URL}/groceries/id/${id}`);
+            return await fetchPromiseJsonOrErr(`${API_URL}/groceries/id/${id}`);
         } else if (name) {
-            return fetchJsonOrErr(`${API_URL}/groceries/name/${name}`);
+            return await loaders.groceryLoader.load(name);
         } else {
             return new Error('grocery Query requires a name or id parameter');
         }
     },
 
-    groceries: (parent, args, context, info) => {
+    groceries: async (parent, args, context, info) => {
         const { category } = args;
+        const { loaders } = context;
         if (category) {
-            return fetchJsonOrErr(`${API_URL}/groceries/category/${category}`);
+            return await loaders.categoryLoader.load(category);
         } else {
-            return fetchJsonOrErr(`${API_URL}/groceries`);
+            return await loaders.allGroceriesLoader.load('placeholder');
         }
     }
 };
 const Mutation = {
     createGrocery: (parent, args, context, info) => {
+        const { loaders } = context;
+        const grocery = fetchPromiseJsonOrErr(`${API_URL}/groceries`, 'POST', args.input)
+            .then(grocery => {
+                loaders.categoryLoader.clear(grocery.category);
+                loaders.allGroceriesLoader.clearAll();
+                return grocery;
+            });
         return {
-            grocery: fetchJsonOrErr(`${API_URL}/groceries`, 'POST', args.input)
+            grocery
         };
     }
 }

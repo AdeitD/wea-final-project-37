@@ -1,15 +1,15 @@
-const { fetch } = require('node-fetch');
+const fetch = require('node-fetch');
 
 const API_URL = 'http://localhost:3000/api/v1';
 
 /**
- * Fetches from a URL and converts the result to a JSON or Error object
+ * Fetches from a URL and promises the result as a JSON or Error object
  * @param {string} url
  * @param {string} [method] - ignored if body is absent
  * @param {Object} [body] - ignored if method is absent
- * @returns {(Object|Error)}
+ * @returns {Promise}
  */
-async function fetchJsonOrErr(url, method, body) {
+function fetchPromiseJsonOrErr(url, method, body) {
     let fetchArgs = [url];
     if (method && body) {
         fetchArgs.push({
@@ -20,17 +20,20 @@ async function fetchJsonOrErr(url, method, body) {
     }
 
     let fetchStatus = 0;
-    const response = await fetch(...fetchArgs)
+    const response = fetch(...fetchArgs)
         .then(res => {
             fetchStatus = res.status;
             return res.json();
         })
         .catch(err => err);
-    if (isGoodStatusCode(fetchStatus)) {
-        return response;
-    } else {
-        return new Error(response);
-    }
+    response.then(json => {
+        if (isGoodStatusCode(fetchStatus)) {
+            return json;
+        } else {
+            return new Error(json);
+        }
+    });
+    return response;
 }
 
 /**
@@ -44,5 +47,5 @@ function isGoodStatusCode(status) {
 
 module.exports = {
     API_URL,
-    fetchJsonOrErr
+    fetchPromiseJsonOrErr
 };
