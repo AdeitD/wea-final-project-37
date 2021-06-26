@@ -44,7 +44,6 @@ gpRouter.get('/groceries/:category', (req, res)=>{
         res.status(404).json({message: `Grocery category: ${category} does not exist`});
     }
     res.json(response).status(200)
-}
 });
 
 

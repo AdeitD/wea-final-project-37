@@ -20,13 +20,13 @@ gRouter.post("/api/v1/groceries", (request, response) => {
         }
     const { name, category } = request.body;
     const NewGrocery= {
-        id: data.length +1
-        name: name;
-        category: category;
+        id: data.length +1,
+        name: name,
+        category: category,
     };
     data.push(NewGrocery);
     return response.status(201).json(NewGrocery)
-}
+});
 
 
 export default gRouter;
