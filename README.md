@@ -19,7 +19,7 @@ Deli
 Organic Materials
 Medicine
 Cleaning Supplies
-Frozen Meat
+Meat
 Baking Ingredients
 Pasta
 Canned Goods
