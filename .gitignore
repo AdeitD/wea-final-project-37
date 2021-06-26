@@ -1,0 +1,4 @@
+#ignore node_modules
+/graphql-api/node_modules/
+/react-application/node_modules/
+/rest-api/node_modules/
