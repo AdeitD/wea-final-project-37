@@ -64,6 +64,16 @@ type Grocery {
     name: String
     category: String
 }
+type Mutation {
+    createGrocery(input: CreateGroceryRequest!): CreateGroceryResponse
+}
+input CreateGroceryRequest {
+    name: String!
+    category: String!
+}
+type CreateGroceryResponse {
+    grocery: Grocery
+}
 ```
 
 Notice that none of the Query types require any of their parameters. The grocery Query is intended to take one parameter.
@@ -71,5 +81,3 @@ Notice that none of the Query types require any of their parameters. The grocery
 The grocery Query will ignore the name parameter if it finds an id parameter. It will return an error if there are no parameters. Otherwise, it will return whatever it gets from the REST API: either a Grocery or an error.
 
 The groceries Query will return whatever it gets from the REST API: either a (possibly empty) list of Grocery objects or an error.
-
-Mutation types will be added later.
