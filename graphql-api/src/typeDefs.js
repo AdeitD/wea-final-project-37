@@ -10,6 +10,16 @@ const typeDefs = gql`
         name: String
         category: String
     }
+    type Mutation {
+        createGrocery(input: CreateGroceryRequest!): CreateGroceryResponse
+    }
+    input CreateGroceryRequest {
+        name: String!
+        category: String!
+    }
+    type CreateGroceryResponse {
+        grocery: Grocery
+    }
 `;
 
 module.exports = typeDefs;

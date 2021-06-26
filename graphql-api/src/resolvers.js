@@ -1,13 +1,35 @@
-const fetch = require('node-fetch');
-
-const API_URL = 'http://localhost:3000/api/v1';
+const { API_URL, fetchJsonOrErr } = require('./utilities');
 
 const Query = {
-    grocery: async (parent, args, context, info) => {
-        return 0;
+    grocery: (parent, args, context, info) => {
+        const { id, name } = args;
+        if (id) {
+            return fetchJsonOrErr(`${API_URL}/groceries/id/${id}`);
+        } else if (name) {
+            return fetchJsonOrErr(`${API_URL}/groceries/name/${name}`);
+        } else {
+            return new Error('grocery Query requires a name or id parameter');
+        }
+    },
+
+    groceries: (parent, args, context, info) => {
+        const { category } = args;
+        if (category) {
+            return fetchJsonOrErr(`${API_URL}/groceries/category/${category}`);
+        } else {
+            return fetchJsonOrErr(`${API_URL}/groceries`);
+        }
     }
 };
+const Mutation = {
+    createGrocery: (parent, args, context, info) => {
+        return {
+            grocery: fetchJsonOrErr(`${API_URL}/groceries`, 'POST', args.input)
+        };
+    }
+}
 
 module.exports = {
-    Query
+    Query,
+    Mutation
 };
