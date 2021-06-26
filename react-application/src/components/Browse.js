@@ -3,7 +3,6 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 function Browse() {
-    const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
 
     const radios = [
