@@ -13,9 +13,9 @@ const tabs = [
   { id: 6, label: "Baking Ingredients", description: "Content of Tab 2" },
   { id: 7, label: "Sauces/Condiments", description: "Content of Tab 2" },
   { id: 8, label: "Cereals/Snacks", description: "Content of Tab 2" },
-  { id: 2, label: "Drinks", description: "Content of Tab 2" },
-  { id: 2, label: "Dairy", description: "Content of Tab 2" },
-  { id: 2, label: "Frozen Goods", description: "Content of Tab 2" }
+  { id: 9, label: "Drinks", description: "Content of Tab 2" },
+  { id: 10, label: "Dairy", description: "Content of Tab 2" },
+  { id: 11, label: "Frozen Goods", description: "Content of Tab 2" }
 ];
 
 function Start() {
@@ -33,6 +33,8 @@ function Start() {
             <Button variant="outline-secondary">Add</Button>
           </InputGroup.Prepend>
         </InputGroup>
+
+        <h3>My Grocery List</h3>
 
         {tabs.map(tab => (
         <Accordion>
