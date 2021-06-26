@@ -6,7 +6,6 @@ const app = express();
 const PORT = process.env.PORT ||3000;
 app.use(express.json());
 
-
 import groceries-parameters from './routes/groceries-parameters';
 import groceries from './routes/groceries';
 
