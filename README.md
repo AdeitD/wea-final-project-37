@@ -40,20 +40,19 @@ The full list of groceries
 /groceries
 
 Gets a grocery by its id number
-/groceries/{id}
+/groceries/id/{id}
 
 Gets a grocery by its name
-/groceries/{name}
+/groceries/name/{name}
 
 Display all groceries with a given category
-/groceries/{category}
+/groceries/category/{category}
 
 ---
 
     GraphQL Type Definitions
 
 ---
-
 
 ```
 type Query {
@@ -66,6 +65,7 @@ type Grocery {
     category: String
 }
 ```
+
 Notice that none of the Query types require any of their parameters. The grocery Query is intended to take one parameter.
 
 The grocery Query will ignore the name parameter if it finds an id parameter. It will return an error if there are no parameters. Otherwise, it will return whatever it gets from the REST API: either a Grocery or an error.
