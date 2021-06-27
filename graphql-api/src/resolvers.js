@@ -1,40 +1,49 @@
-const { API_URL, fetchPromiseJsonOrErr } = require('./utilities');
+const {
+    API_URL,
+    fetchPromiseJsonOrErr,
+    createNewError,
+    checkIfError
+} = require('./utilities');
 
 const Query = {
     grocery: async (parent, args, context, info) => {
         const { id, name } = args;
         const { loaders } = context;
+        let grocery;
         if (id) {
-            return await fetchPromiseJsonOrErr(`${API_URL}/groceries/id/${id}`);
+            grocery = await fetchPromiseJsonOrErr(`${API_URL}/groceries/id/${id}`);
         } else if (name) {
-            return await loaders.groceryLoader.load(name);
+            grocery = await loaders.groceryLoader.load(name);
         } else {
-            return new Error('grocery Query requires a name or id parameter');
+            return createNewError('grocery Query requires a name or id parameter');
         }
+        return checkIfError(grocery);
     },
 
     groceries: async (parent, args, context, info) => {
         const { category } = args;
         const { loaders } = context;
+        let groceries;
         if (category) {
-            return await loaders.categoryLoader.load(category);
+            groceries = await loaders.categoryLoader.load(category);
         } else {
-            return await loaders.allGroceriesLoader.load('placeholder');
+            groceries = await loaders.allGroceriesLoader.load(
+                'Unused parameter. The .load() method requires non-null.'
+            );
         }
+        return checkIfError(groceries);
     }
 };
 const Mutation = {
-    createGrocery: (parent, args, context, info) => {
+    createGrocery: async (parent, args, context, info) => {
         const { loaders } = context;
-        const grocery = fetchPromiseJsonOrErr(`${API_URL}/groceries`, 'POST', args.input)
+        const grocery = await fetchPromiseJsonOrErr(`${API_URL}/groceries`, 'POST', args.input)
             .then(grocery => {
                 loaders.categoryLoader.clear(grocery.category);
                 loaders.allGroceriesLoader.clearAll();
                 return grocery;
             });
-        return {
-            grocery
-        };
+        return checkIfError(grocery, { grocery });
     }
 }
 

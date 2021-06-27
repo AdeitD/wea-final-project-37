@@ -30,7 +30,8 @@ function fetchPromiseJsonOrErr(url, method, body) {
         if (isGoodStatusCode(fetchStatus)) {
             return json;
         } else {
-            return new Error(json);
+            json.isAnError = true; // needed since instanceOf Error doesn't work between files
+            return createNewError(json);
         }
     });
     return response;
@@ -45,7 +46,39 @@ function isGoodStatusCode(status) {
     return (200 <= status && status < 300);
 }
 
+/**
+ * Creates a new error from the argument, giving it property isAnError: true
+ * This is needed because instanceOf Error does not work between files
+ * @param {Any} error 
+ * @returns {Error}
+ */
+function createNewError(error) {
+    error.isAnError = true;
+    return new Error(error);
+}
+
+/**
+ * Returns the desired value unless given an error, in which case returns a
+ * new Error object made from the error.
+ * Errors must have property isAnError: true, since instanceOf Error does not
+ * work between files.
+ * @param {Any} value - the value that might be an error
+ * @param {Any} [desired = value] - the desired value we hope to return
+ * @returns {Any}
+ */
+function checkIfError(value, desired) {
+    if (value.isAnError) {
+        return createNewError(JSON.stringify(value));
+    }
+    if (!desired) {
+        desired = value;
+    }
+    return desired;
+}
+
 module.exports = {
     API_URL,
-    fetchPromiseJsonOrErr
+    fetchPromiseJsonOrErr,
+    createNewError,
+    checkIfError
 };
