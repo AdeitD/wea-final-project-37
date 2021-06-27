@@ -84,7 +84,7 @@ function BrowseList({ type }) {
         fetchGroceries();
     }, [type]);
 
-    return (gList && gList.map(n => <BrowseListItem name={n} />))
+    return (gList && gList.map(n => <BrowseListItem key={n} name={n} />))
 }
 
 export default BrowseList;
