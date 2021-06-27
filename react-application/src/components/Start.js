@@ -3,21 +3,22 @@ import React, {useState} from 'react';
 //import Button from 'react-bootstrap/Button';
 //import FormControl from 'react-bootstrap/FormControl';
 import { Accordion, Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import StartList from './StartList';
 
 
 
 const tabs = [
-  { id: 1, label: "Produce", description: "*insert food stuff here" },
-  { id: 2, label: "Bakery", description: "Content of Tab 2" },
-  { id: 3, label: "Deli", description: "Content of Tab 3" },
-  { id: 4, label: "Frozen Meat", description: "Content of Tab 2" },
-  { id: 5, label: "Organic Materials", description: "Content of Tab 2" },
-  { id: 6, label: "Baking Ingredients", description: "Content of Tab 2" },
-  { id: 7, label: "Sauces/Condiments", description: "Content of Tab 2" },
-  { id: 8, label: "Cereals/Snacks", description: "Content of Tab 2" },
-  { id: 9, label: "Drinks", description: "Content of Tab 2" },
-  { id: 10, label: "Dairy", description: "Content of Tab 2" },
-  { id: 11, label: "Frozen Goods", description: "Content of Tab 2" }
+  { id: 1, label: "Produce", description: "" },
+  { id: 2, label: "Bakery", description: "" },
+  { id: 3, label: "Deli", description: "" },
+  { id: 4, label: "Frozen Meat", description: "" },
+  { id: 5, label: "Organic Materials", description: "" },
+  { id: 6, label: "Baking Ingredients", description: "" },
+  { id: 7, label: "Sauces/Condiments", description: "" },
+  { id: 8, label: "Cereals/Snacks", description: "" },
+  { id: 9, label: "Drinks", description: "" },
+  { id: 10, label: "Dairy", description: "" },
+  { id: 11, label: "Frozen Goods", description: "" }
 ];
 
 const Start = () => {
@@ -33,7 +34,7 @@ const Start = () => {
 
   const GQL_API = `http://localhost:3030/`
     const GQL_QUERY = `
-        query {
+        query ($name: String!) {
           grocery (name: $name){
             name
             category
@@ -42,28 +43,49 @@ const Start = () => {
         }`;
 
         const handleLoadGroceries = () => {
-          const variables = { name: groceryName};
-          fetch(GQL_API, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                query: GQL_QUERY,
-                variables,
-            }),
-        })
-            .then((response) => response.json())
-            .then(res => console.log(res.data))
-            // .then((result) => setDoctorsList(result.data.patient.doctors));
-            }
+          
+          const variables = { name: groceryName };
+            fetch(GQL_API, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  query: GQL_QUERY,
+                  variables,
+              }),
+            })
+              .then((response) => response.json())
+              .then(res => {
+                if (res.errors) {
+                  throw res.errors[0];
+                }
+                return res;
+              })
+              .then(res => res.data.grocery)
+              .then(res => {
+                // Get the tab that corresponds to the category
+                const idx = tabs.findIndex((t) => t.label === res.category);
+                if (tabs[idx].description) {
+                  // Add a space which the program uses as a delimiter between objects
+                  tabs[idx].description += ' ';
+                }
+              
+                tabs[idx].description += res.name;
+                // Reset the state in order to re-render the objects
+                setGroceryName('');
+              })
+              .catch(error => console.error(error.message))
+          }
+          
+            
 
   return (
       <div>
         <h2>Get Started</h2>
         
         <input type='text' value={groceryName} onChange={handleChangeName} />
-        <Button onClick={handleAddGrocery, handleLoadGroceries}>Add</Button>
+        <Button onClick={handleLoadGroceries}>Add</Button>
 
         <h3>My Grocery List</h3>
 
@@ -76,7 +98,9 @@ const Start = () => {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey={tab.id}>
-              <Card.Body>{tab.description}</Card.Body>
+              <Card.Body>
+                <StartList items={tab.description} />
+              </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
