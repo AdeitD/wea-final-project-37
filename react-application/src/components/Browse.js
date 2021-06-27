@@ -17,9 +17,13 @@ function Browse() {
         setRadioValue(e.currentTarget.value)
     }
 
+    const handleOnClick = (name) => {
+        console.log(name);
+    }
+
     return (
       <div>
-        <h2>Browse</h2>
+        <h2 style={{position:"relative", left:"10px"}} >Browse</h2>
         <>
             <ButtonGroup toggle>
                 {radios.map((radio, idx) => (
@@ -31,12 +35,13 @@ function Browse() {
                         value={radio.value}
                         checked={radioValue === radio.value}
                         onChange={(e) => handleChange(e)}
+                        style={{position:"relative", left:"10px"}}
                     >
                     {radio.name}
                     </ToggleButton>
                 ))}
             </ButtonGroup>
-            <BrowseList type={radioValue} />
+            <BrowseList type={radioValue} onClick={handleOnClick}/>
         </>
     </div>
     );

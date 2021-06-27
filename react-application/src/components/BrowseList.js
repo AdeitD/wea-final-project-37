@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BrowseListItem from './BrowseListItem';
 import categories from '../resources/categories'
 
-function BrowseList({ type }) {
+function BrowseList({ type, onClick }) {
     const [gList, setGList] = useState(null);
 
     const GQL_API = `http://localhost:3030/`; 
@@ -80,11 +80,15 @@ function BrowseList({ type }) {
         }
     }
 
+    const handleOnClick = (name) => {
+        onClick(name);
+    }
+
     useEffect(() => {
         fetchGroceries();
     }, [type]);
 
-    return (gList && gList.map(n => <BrowseListItem key={n} name={n} />))
+    return (gList && gList.map(n => <BrowseListItem key={n} name={n} onClick={handleOnClick} />))
 }
 
 export default BrowseList;
