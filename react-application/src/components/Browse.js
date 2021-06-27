@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
+import BrowseList from './BrowseList';
+
 function Browse() {
     const [radioValue, setRadioValue] = useState('1');
 
@@ -10,6 +12,10 @@ function Browse() {
         { name: 'Category', value: '2' },
         { name: 'Random', value: '3' },
     ];
+
+    const handleChange = (e) => {
+        setRadioValue(e.currentTarget.value)
+    }
 
     return (
       <div>
@@ -24,12 +30,13 @@ function Browse() {
                         name="radio"
                         value={radio.value}
                         checked={radioValue === radio.value}
-                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                        onChange={(e) => handleChange(e)}
                     >
                     {radio.name}
                     </ToggleButton>
                 ))}
             </ButtonGroup>
+            <BrowseList type={radioValue} />
         </>
     </div>
     );
