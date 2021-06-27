@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 //import InputGroup from 'react-bootstrap/InputGroup';
 //import Button from 'react-bootstrap/Button';
 //import FormControl from 'react-bootstrap/FormControl';
-import { Accordion, Card, Button, FormControl, InputGroup } from "react-bootstrap";
+import { Accordion, Card, Button } from "react-bootstrap";
+
+
 
 const tabs = [
   { id: 1, label: "Produce", description: "*insert food stuff here" },
@@ -18,21 +20,50 @@ const tabs = [
   { id: 11, label: "Frozen Goods", description: "Content of Tab 2" }
 ];
 
-function Start() {
-    return (
+const Start = () => {
+  const [groceryName, setGroceryName] = useState('');
+  
+  const handleChangeName = (event) => {
+    setGroceryName(event.target.value);//takes value entered on site, sets variable to it
+  }
+
+  const handleAddGrocery = () => {
+    console.log(groceryName);
+  };
+
+  const GQL_API = `http://localhost:3030/`
+    const GQL_QUERY = `
+        query {
+          grocery (name: $name){
+            name
+            category
+          }
+            
+        }`;
+
+        const handleLoadGroceries = () => {
+          const variables = { name: groceryName};
+          fetch(GQL_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                query: GQL_QUERY,
+                variables,
+            }),
+        })
+            .then((response) => response.json())
+            .then(res => console.log(res.data))
+            // .then((result) => setDoctorsList(result.data.patient.doctors));
+            }
+
+  return (
       <div>
         <h2>Get Started</h2>
         
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Enter Grocery Name"
-            aria-label="Enter Grocery Name"
-            aria-describedby="basic-addon2"
-          />
-          <InputGroup.Prepend>
-            <Button variant="outline-secondary">Add</Button>
-          </InputGroup.Prepend>
-        </InputGroup>
+        <input type='text' value={groceryName} onChange={handleChangeName} />
+        <Button onClick={handleAddGrocery, handleLoadGroceries}>Add</Button>
 
         <h3>My Grocery List</h3>
 
