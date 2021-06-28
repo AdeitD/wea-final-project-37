@@ -4,7 +4,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 import BrowseList from './BrowseList';
 
-function Browse() {
+function Browse({ onClick }) {
     const [radioValue, setRadioValue] = useState('1');
 
     const radios = [
@@ -18,7 +18,7 @@ function Browse() {
     }
 
     const handleOnClick = (name) => {
-        console.log(name);
+        onClick(name);
     }
 
     return (

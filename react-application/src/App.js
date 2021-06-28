@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,20 @@ import './App.css';
 
 
 function App() {
+  const [addItem, setAddItem] = useState([]);
+  const [added, setAdded] = useState(false);
+
+  const handleBrowseClick = (item) => {
+    if (!added) {
+      const newItemList = [...addItem, item];
+      setAddItem(newItemList);
+    } else {
+      setAdded(false);
+      setAddItem([item]);
+    }
+    
+  }
+
   return (
     <Router>
       <div>
@@ -42,10 +56,10 @@ function App() {
             <Home />
           </Route>
           <Route path="/get-started">
-            <Start />
+            <Start newItem={addItem}/>
           </Route>
           <Route path="/browse">
-            <Browse />
+            <Browse onClick={handleBrowseClick}/>
           </Route>
         </Switch>
       </div>

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 //import InputGroup from 'react-bootstrap/InputGroup';
 //import Button from 'react-bootstrap/Button';
 //import FormControl from 'react-bootstrap/FormControl';
 import { Accordion, Card, Button, InputGroup, FormControl } from "react-bootstrap";
 import StartList from './StartList';
 
-
+const alreadyAdded = [];
 
 const tabs = [
   { id: 1, label: "Produce", description: "" },
@@ -26,16 +26,12 @@ const tabs = [
   { id: 16, label: "Misc.", description: "" }
 ];
 
-const Start = () => {
+const Start = ({ newItem }) => {
   const [groceryName, setGroceryName] = useState('');
   
   const handleChangeName = (event) => {
     setGroceryName(event.target.value);//takes value entered on site, sets variable to it
   }
-
-  const handleAddGrocery = () => {
-    console.log(groceryName);
-  };
 
   const GQL_API = `http://localhost:3030/`
     const GQL_QUERY = `
@@ -69,6 +65,14 @@ const Start = () => {
               })
               .then(res => res.data.grocery)
               .then(res => {
+                // If the item exists in the list already, return early
+                console.log(alreadyAdded)
+                if (alreadyAdded.find(groc => groc === res.name)) {
+                  setGroceryName('')
+                  return;
+                } else {
+                  alreadyAdded.push(res.name)
+                }
                 // Get the tab that corresponds to the category
                 const idx = tabs.findIndex((t) => t.label === res.category);
                 if (tabs[idx].description) {
@@ -83,7 +87,54 @@ const Start = () => {
               .catch(error => console.error(error.message))
           }
           
+      useEffect(() => {
+        if (newItem.length > 0) {
+          for (let i = 0; i < newItem.length; ++i) {
+
+          const variables = { name: newItem[i] };
+            fetch(GQL_API, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  query: GQL_QUERY,
+                  variables,
+              }),
+            })
+              .then((response) => response.json())
+              .then(res => {
+                if (res.errors) {
+                  throw res.errors[0];
+                }
+                return res;
+              })
+              .then(res => res.data.grocery)
+              .then(res => {
+                setGroceryName('Added from browse');
+                // If the item exists in the list already, return early
+                if (alreadyAdded.find(groc => groc === res.name)) {
+                  setGroceryName('')
+                  return;
+                } else {
+                  alreadyAdded.push(res.name)
+                }
+                // Get the tab that corresponds to the category
+                const idx = tabs.findIndex((t) => t.label === res.category);
+                if (tabs[idx].description) {
+                  // Add a space which the program uses as a delimiter between objects
+                  tabs[idx].description += '\n';
+                }
+              
+                tabs[idx].description += res.name;
+                // Reset the state in order to re-render the objects
+                setGroceryName('');
+              })
+              .catch(error => console.error(error.message))
+            }
             
+        }
+      }, [newItem, GQL_API, GQL_QUERY])
 
   return (
       <div>
