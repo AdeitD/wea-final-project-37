@@ -14,7 +14,7 @@ function fetchPromiseJsonOrErr(url, method, body) {
     if (method && body) {
         fetchArgs.push({
             method,
-            body: JSON.stringify(body),
+            body: body.error,
             headers: {'Content-type': 'application/json; charset=UTF-8'}
         })
     }
