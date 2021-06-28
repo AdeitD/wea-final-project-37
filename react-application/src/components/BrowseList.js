@@ -53,6 +53,7 @@ function BrowseList({ type, onClick }) {
                     }), 
                 })
                     .then((res) => res.json())
+                    // eslint-disable-next-line no-loop-func
                     .then((res) => {
                         let grocArr = res.data.groceries;
                         grocArr = grocArr.map((groc) => groc.name)
@@ -86,6 +87,7 @@ function BrowseList({ type, onClick }) {
 
     useEffect(() => {
         fetchGroceries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [type]);
 
     return (gList && gList.map(n => <BrowseListItem key={n} name={n} onClick={handleOnClick} />))

@@ -24,6 +24,7 @@ function Browse({ onClick }) {
     return (
       <div>
         <h2 style={{position:"relative", left:"10px"}} >Browse</h2>
+        <p style={{position:"relative", left:"10px"}}>Click on an item you want to add it to your list! You can see your Grocery List on the Get Started page.</p>
         <>
             <ButtonGroup toggle>
                 {radios.map((radio, idx) => (

@@ -142,6 +142,10 @@ const Start = ({ newItem }) => {
   return (
       <div>
         <h2 style={{position:"relative", left:"10px"}}>Get Started</h2>
+
+        <p style={{position:"relative", left:"10px"}}> Add an item to your list by typing it into the form below! Your items will be sorted by category for you.</p>
+        <p style={{position:"relative", left:"10px"}}> Be sure to capitalize the first letter of each word!</p>
+        <p style={{position:"relative", left:"10px"}}> If you don't know what you want to buy, check out the Browse page, where you can also add items to your Grocery List.</p>
         
         <input type='text' style={{position:"relative", left:"10px", height:"38px"}} value={groceryName} onChange={handleChangeName} />
         <Button style={{position:"relative", left:"10px", top:"-2px"}} onClick={handleLoadGroceries}>Add</Button>
