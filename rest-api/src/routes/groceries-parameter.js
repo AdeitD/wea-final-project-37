@@ -10,12 +10,12 @@ const gpRouter = express.Router();
 gpRouter.get('/groceries/id/:id', (req, res)=>{              
     let id = parseInt(req.params.id); 
     if (isNaN(id)){
-        res.status(404).json({message: `Invalid id`});
+        res.status(404).json({error: `Invalid id`});
     }
     else{
     let response= data.find((grocery) => grocery.id === id.toString());
     if (!response){
-        res.status(404).json({message: `Grocery with ID: ${id} does not exist`});
+        res.status(404).json({error: `Grocery with ID: ${id} does not exist`});
     }
     res.json(response).status(200)
 }
@@ -36,7 +36,7 @@ gpRouter.get('/groceries/name/:name', (req, res)=> {
 
     let response = binSearch(data, name);
     if (!response){
-        res.status(404).json({message: `Grocery with name: ${name} does not exist`});
+        res.status(404).json({ error: `Grocery with name: ${name} does not exist`});
     }
     res.json(response).status(200)
 });
@@ -59,7 +59,7 @@ gpRouter.get('/groceries/category/:category', (req, res)=>{
 
     let response = data.filter((grocery) => grocery.category === category);
     if (!response){
-        res.status(404).json({message: `Grocery category: ${category} does not exist`});
+        res.status(404).json({ error: `Grocery category: ${category} does not exist` });
     }
     res.json(response).status(200)
 });
