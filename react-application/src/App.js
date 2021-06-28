@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ToastContainer } from 'react-toastify';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +9,7 @@ import {
 import Home from "./components/Home";
 import Start from "./components/Start";
 import Browse from "./components/Browse";
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 

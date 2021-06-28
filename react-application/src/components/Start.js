@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 //import InputGroup from 'react-bootstrap/InputGroup';
 //import Button from 'react-bootstrap/Button';
 //import FormControl from 'react-bootstrap/FormControl';
-import { Accordion, Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import { Accordion, Card, Button } from "react-bootstrap";
 import StartList from './StartList';
 
 const alreadyAdded = [];
@@ -145,7 +145,7 @@ const Start = ({ newItem }) => {
 
         <h3 style={{position:"relative", left:"10px"}}>My Grocery List</h3>
 
-        {tabs.map(tab => (
+        {tabs.map(tab => (tab.description &&
         <Accordion>
           <Card>
             <Card.Header>
