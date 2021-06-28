@@ -11,14 +11,19 @@ const tabs = [
   { id: 1, label: "Produce", description: "" },
   { id: 2, label: "Bakery", description: "" },
   { id: 3, label: "Deli", description: "" },
-  { id: 4, label: "Frozen Meat", description: "" },
-  { id: 5, label: "Organic Materials", description: "" },
-  { id: 6, label: "Baking Ingredients", description: "" },
-  { id: 7, label: "Sauces/Condiments", description: "" },
-  { id: 8, label: "Cereals/Snacks", description: "" },
-  { id: 9, label: "Drinks", description: "" },
-  { id: 10, label: "Dairy", description: "" },
-  { id: 11, label: "Frozen Goods", description: "" }
+  { id: 4, label: "Organic Materials", description: "" },
+  { id: 5, label: "Medicine", description: "" },
+  { id: 6, label: "Cleaning Supplies", description: "" },
+  { id: 7, label: "Meat", description: "" },
+  { id: 8, label: "Baking Ingredients", description: "" },
+  { id: 9, label: "Pasta", description: "" },
+  { id: 10, label: "Canned Goods", description: "" },
+  { id: 11, label: "Sauces-Condiments", description: "" },
+  { id: 12, label: "Cereals-Snacks", description: "" },
+  { id: 13, label: "Drinks", description: "" },
+  { id: 14, label: "Dairy", description: "" },
+  { id: 15, label: "Frozen Goods", description: "" },
+  { id: 16, label: "Misc.", description: "" }
 ];
 
 const Start = () => {
@@ -68,7 +73,7 @@ const Start = () => {
                 const idx = tabs.findIndex((t) => t.label === res.category);
                 if (tabs[idx].description) {
                   // Add a space which the program uses as a delimiter between objects
-                  tabs[idx].description += ' ';
+                  tabs[idx].description += '\n';
                 }
               
                 tabs[idx].description += res.name;
@@ -82,12 +87,12 @@ const Start = () => {
 
   return (
       <div>
-        <h2>Get Started</h2>
+        <h2 style={{position:"relative", left:"10px"}}>Get Started</h2>
         
-        <input type='text' value={groceryName} onChange={handleChangeName} />
-        <Button onClick={handleLoadGroceries}>Add</Button>
+        <input type='text' style={{position:"relative", left:"10px", height:"38px"}} value={groceryName} onChange={handleChangeName} />
+        <Button style={{position:"relative", left:"10px", top:"-2px"}} onClick={handleLoadGroceries}>Add</Button>
 
-        <h3>My Grocery List</h3>
+        <h3 style={{position:"relative", left:"10px"}}>My Grocery List</h3>
 
         {tabs.map(tab => (
         <Accordion>

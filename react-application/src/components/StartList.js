@@ -5,7 +5,7 @@ function StartList({ items }) {
     const [gList, setGList] = useState([]);
 
     useEffect(() => {
-        setGList(items.split(' '));
+        setGList(items.split('\n'));
     }, [items]);
 
     return (gList && gList.map(n => <StartListItem key={n} name={n} />))
