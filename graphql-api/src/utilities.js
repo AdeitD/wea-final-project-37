@@ -68,7 +68,7 @@ function createNewError(error) {
  */
 function checkIfError(value, desired) {
     if (value.isAnError) {
-        return createNewError(JSON.stringify(value));
+        return createNewError(value.error);
     }
     if (!desired) {
         desired = value;
