@@ -10,7 +10,7 @@ function Home() {
                 so you can quickly find all the items you need!</p>
             <p>The 'Get Started' page will help you set up a categorized grocery list, whereas 
                 the 'Browse' page will let you search our database for items you might like 
-                to add to your list.</p>
+                to add to your list. Click on an item in Browse to add it to your list!</p>
         </div>
     );
 }

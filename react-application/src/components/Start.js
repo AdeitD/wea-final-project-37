@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-//import InputGroup from 'react-bootstrap/InputGroup';
-//import Button from 'react-bootstrap/Button';
-//import FormControl from 'react-bootstrap/FormControl';
 import { Accordion, Card, Button } from "react-bootstrap";
 import StartList from './StartList';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const alreadyAdded = [];
 
@@ -68,6 +67,8 @@ const Start = ({ newItem }) => {
                 // If the item exists in the list already, return early
                 console.log(alreadyAdded)
                 if (alreadyAdded.find(groc => groc === res.name)) {
+                  toast.warn(`Grocery "${res.name}" is already added!`);
+
                   setGroceryName('')
                   return;
                 } else {
@@ -83,8 +84,10 @@ const Start = ({ newItem }) => {
                 tabs[idx].description += res.name;
                 // Reset the state in order to re-render the objects
                 setGroceryName('');
+
+                toast.success(`Grocery "${groceryName}" added!`);
               })
-              .catch(error => console.error(error.message))
+              .catch(error => toast.error(error.message));
           }
           
       useEffect(() => {
@@ -130,7 +133,7 @@ const Start = ({ newItem }) => {
                 // Reset the state in order to re-render the objects
                 setGroceryName('');
               })
-              .catch(error => console.error(error.message))
+              .catch(error => toast.error(error.message));
             }
             
         }

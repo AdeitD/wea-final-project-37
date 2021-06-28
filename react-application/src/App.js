@@ -43,7 +43,7 @@ function App() {
             <Link to="/browse">Browse</Link>
           </li>
         </ul>
-
+        <ToastContainer />
         <hr />
 
         {/*
