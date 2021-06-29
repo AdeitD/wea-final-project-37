@@ -9,6 +9,7 @@ import {
 import Home from "./components/Home";
 import Start from "./components/Start";
 import Browse from "./components/Browse";
+import Add from "./components/Add";
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -42,6 +43,9 @@ function App() {
           <li>
             <Link to="/browse">Browse</Link>
           </li>
+          <li>
+            <Link to="/add-grocery">Add</Link>
+          </li>
         </ul>
         <ToastContainer />
         <hr />
@@ -62,6 +66,9 @@ function App() {
           </Route>
           <Route path="/browse">
             <Browse onClick={handleBrowseClick}/>
+          </Route>
+          <Route path="/add-grocery">
+            <Add />
           </Route>
         </Switch>
       </div>
