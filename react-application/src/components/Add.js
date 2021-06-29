@@ -48,11 +48,11 @@ function Add() {
           })
           .then(res => res.data.createGrocery.grocery)
           .then(res => {
-                /* TODO: Toastify success message here */ console.log(`Grocery: ${res.name} successfully added under Category: ${res.category}`)
+                toast.success(`Grocery: ${res.name} successfully added under Category: ${res.category}`)
                 setGroceryName('');
             })
           .catch(err => {
-                /* TODO: Toastify error message here */ console.error(err.message)
+                toast.error(err.message)
                 setGroceryName('');
             })
 
