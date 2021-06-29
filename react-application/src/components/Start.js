@@ -145,22 +145,24 @@ const Start = ({ newItem }) => {
 
         <p style={{position:"relative", left:"10px"}}> Add an item to your list by typing it into the form below! Your items will be sorted by category for you.</p>
         <p style={{position:"relative", left:"10px"}}> Be sure to capitalize the first letter of each word!</p>
-        <p style={{position:"relative", left:"10px"}}> If you don't know what you want to buy, check out the Browse page, where you can also add items to your Grocery List.</p>
+        <p style={{position:"relative", left:"10px"}}> If you don't know what you want to buy, check out the Browse page, where you can also add items to your Grocery List .</p>
       
 
-        <InputGroup className="mb-3">
-        
-      <InputGroup.Prepend>
-        <Button variant="primary" onClick={handleLoadGroceries} >Add</Button>
-      </InputGroup.Prepend>
-      <FormControl
-          placeholder="Enter Grocery Name"
-          aria-label="Enter Grocery Name"
-          aria-describedby="basic-addon2"
-          value={groceryName}
-          onChange={handleChangeName}
-        />
-      </InputGroup>
+        <InputGroup className="w-25 p-2 mb-1">
+      
+          <FormControl
+            placeholder="Enter Grocery Name"
+            aria-label="Enter Grocery Name"
+            aria-describedby="add-to-list"
+            value={groceryName}
+            onChange={handleChangeName}
+          />
+
+          <InputGroup.Append>
+            <Button onClick={handleLoadGroceries} >Add</Button>
+          </InputGroup.Append>
+        </InputGroup>
+      
 
         <h3 style={{position:"relative", left:"10px"}}>My Grocery List</h3>
 
