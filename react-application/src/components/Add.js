@@ -48,7 +48,7 @@ function Add() {
           })
           .then(res => res.data.createGrocery.grocery)
           .then(res => {
-                toast.success(`Grocery: ${res.name} successfully added under Category: ${res.category}`)
+                toast.success(`Grocery: ${res.name} successfully added under the category "${res.category}"`)
                 setGroceryName('');
             })
           .catch(err => {
