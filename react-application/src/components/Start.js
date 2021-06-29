@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, Card, Button } from "react-bootstrap";
+import { Accordion, Card, Button, FormControl, InputGroup } from "react-bootstrap";
 import StartList from './StartList';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -146,9 +146,21 @@ const Start = ({ newItem }) => {
         <p style={{position:"relative", left:"10px"}}> Add an item to your list by typing it into the form below! Your items will be sorted by category for you.</p>
         <p style={{position:"relative", left:"10px"}}> Be sure to capitalize the first letter of each word!</p>
         <p style={{position:"relative", left:"10px"}}> If you don't know what you want to buy, check out the Browse page, where you can also add items to your Grocery List.</p>
+      
+
+        <InputGroup className="mb-3">
         
-        <input type='text' style={{position:"relative", left:"10px", height:"38px"}} value={groceryName} onChange={handleChangeName} />
-        <Button style={{position:"relative", left:"10px", top:"-2px"}} onClick={handleLoadGroceries}>Add</Button>
+      <InputGroup.Prepend>
+        <Button variant="primary" onClick={handleLoadGroceries} >Add</Button>
+      </InputGroup.Prepend>
+      <FormControl
+          placeholder="Enter Grocery Name"
+          aria-label="Enter Grocery Name"
+          aria-describedby="basic-addon2"
+          value={groceryName}
+          onChange={handleChangeName}
+        />
+      </InputGroup>
 
         <h3 style={{position:"relative", left:"10px"}}>My Grocery List</h3>
 
