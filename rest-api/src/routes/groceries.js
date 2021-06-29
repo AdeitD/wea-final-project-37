@@ -14,10 +14,10 @@ gRouter.get('/groceries', (req, res)=>{
 //adds new grocery to list
 gRouter.post("/groceries", (request, response) => {
     if (!request.body.name) {
-        return res.status(400).json({ error: "Grocery needs a name parameter." });
+        return response.status(400).json({ error: "Grocery needs a name parameter." });
         }
     if (!request.body.category) {
-        return res.status(400).json({ error: "Grocery needs a category parameter." });
+        return response.status(400).json({ error: "Grocery needs a category parameter." });
         }
     const { name, category } = request.body;
     const newGrocery = {

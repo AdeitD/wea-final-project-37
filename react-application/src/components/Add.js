@@ -6,11 +6,55 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Add() {
     const [value,setValue]=useState('None');
+    const [groceryName, setGroceryName] = useState('');
     const handleSelect=(e)=>{
         setValue(e)
     }
 
+    const handleChangeName = (e) => {
+        setGroceryName(e.target.value);
+    }
+
     const handleAddNew = () => {
+        const GQL_API = `http://localhost:3030/`
+        const GQL_MUTATION = `
+            mutation ($name: String!, $category: String!) {
+                createGrocery (input:{name: $name, category: $category}) {
+                    grocery {
+                        name
+                        category
+                    }
+                }
+            }`;
+        const variables = { name: groceryName, category: value };
+
+        // Mutate the graphql
+        fetch(GQL_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                query: GQL_MUTATION,
+                variables,
+            }),
+          })
+          .then(res => res.json())
+          .then(res => {
+              if (res.errors) {
+                  throw res.errors[0];
+              }
+              return res;
+          })
+          .then(res => res.data.createGrocery.grocery)
+          .then(res => {
+                /* TODO: Toastify success message here */ console.log(`Grocery: ${res.name} successfully added under Category: ${res.category}`)
+                setGroceryName('');
+            })
+          .catch(err => {
+                /* TODO: Toastify error message here */ console.error(err.message)
+                setGroceryName('');
+            })
 
     }
 
@@ -53,6 +97,8 @@ function Add() {
                     placeholder="Enter New Grocery Name"
                     aria-label="Enter New Grocery Name"
                     aria-describedby="grocery-input-form"
+                    value={groceryName}
+                    onChange={handleChangeName}
                 />
                 <InputGroup.Append>
                     <Button variant="primary" onClick={handleAddNew}>Add</Button>

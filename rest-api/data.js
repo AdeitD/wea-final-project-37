@@ -28,6 +28,13 @@ const data = [
     {"id":"27","name":"Coffee","category":"Drinks"},
     {"id":"28","name":"Corn Flakes","category":"Cereals-Snacks"},
     {"id":"29","name":"Cottage Cheese","category":"Dairy"},
+    {"id":"30","name":"Cream Cheese","category":"Dairy"},
+    {"id":"31","name":"Croissants","category":"Bakery"},
+    {"id":"32","name":"Eggs","category":"Dairy"},
+    {"id":"33","name":"Fish","category":"Meat"},
+    {"id":"34","name":"Flour","category":"Baking Ingredients"},
+    {"id":"35","name":"French Fries","category":"Frozen Goods"},
+    {"id":"36","name":"Fries","category":"Frozen Goods"},
 ]
 
 export default data;

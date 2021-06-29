@@ -14,11 +14,10 @@ function fetchPromiseJsonOrErr(url, method, body) {
     if (method && body) {
         fetchArgs.push({
             method,
-            body: body.error,
+            body: JSON.stringify(body),
             headers: {'Content-type': 'application/json; charset=UTF-8'}
         })
     }
-
     let fetchStatus = 0;
     const response = fetch(...fetchArgs)
         .then(res => {

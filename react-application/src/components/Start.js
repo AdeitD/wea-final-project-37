@@ -87,7 +87,10 @@ const Start = ({ newItem }) => {
 
                 toast.success(`Grocery "${groceryName}" added!`);
               })
-              .catch(error => toast.error(error.message));
+              .catch(error => {
+                toast.error(error.message);
+                setGroceryName('');
+              });
           }
           
       useEffect(() => {
