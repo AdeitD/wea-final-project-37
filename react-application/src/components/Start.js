@@ -32,7 +32,7 @@ const Start = ({ newItem }) => {
     setGroceryName(event.target.value);//takes value entered on site, sets variable to it
   }
 
-  const GQL_API = `http://localhost:3030/`
+  const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`;
     const GQL_QUERY = `
         query ($name: String!) {
           grocery (name: $name){

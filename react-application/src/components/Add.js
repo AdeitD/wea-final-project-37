@@ -16,7 +16,7 @@ function Add() {
     }
 
     const handleAddNew = () => {
-        const GQL_API = `http://localhost:3030/`
+        const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`;
         const GQL_MUTATION = `
             mutation ($name: String!, $category: String!) {
                 createGrocery (input:{name: $name, category: $category}) {

@@ -5,7 +5,7 @@ import categories from '../resources/categories'
 function BrowseList({ type, onClick }) {
     const [gList, setGList] = useState(null);
 
-    const GQL_API = `http://localhost:3030/`; 
+    const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`; 
     const GQL_QUERY_ALPHA = `
         query {
             groceries {
