@@ -1,9 +1,13 @@
+const express = require('express');
+const cors = require('cors');
 const { ApolloServer } = require('apollo-server');
-const { PORT = 3030 } = process.env;
-
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 const { getDataLoaders } = require('./loaders');
+
+const app = express()
+
+app.use(cors());
 
 const server = new ApolloServer({
     typeDefs,
@@ -13,6 +17,6 @@ const server = new ApolloServer({
     })
 });
 
-server
-    .listen(PORT)
-    .then(({ url }) => console.log(`Server running at ${url}`));
+server.listen({ port: process.env.PORT || 3030 }).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+});
