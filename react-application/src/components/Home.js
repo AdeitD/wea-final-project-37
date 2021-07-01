@@ -4,7 +4,7 @@ function Home() {
     return (
         <div>
             <h2 style={{position:"relative", left:"10px"}}>Home</h2>
-            <p style={{position:"relative", left:"10px"}}>Welcome to Shopping List, where you can create a list of groceries!</p>
+            <p style={{position:"relative", left:"10px"}}>Welcome to Grocery List, where you can create a list of groceries!</p>
             <p style={{position:"relative", left:"10px"}}>Your items will be sorted into their respective grocery categories for you, 
                 so you can quickly find all the items you need!</p>
             <p style={{position:"relative", left:"10px"}}>The 'Get Started' page will help you set up a categorized grocery list, whereas 
