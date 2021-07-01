@@ -1,4 +1,4 @@
-To be determined later
+Grocery List - now live on Heroku at https://wea-grocery-list.herokuapp.com/
 
 ---
 
