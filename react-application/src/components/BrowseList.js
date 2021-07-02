@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import BrowseListItem from './BrowseListItem';
-import categories from '../resources/categories'
+import categories from '../resources/categories';
+import { GQL_API } from '../resources/constants';
 
 function BrowseList({ type, onClick }) {
     const [gList, setGList] = useState(null);
 
-    const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`; 
     const GQL_QUERY_ALPHA = `
         query {
             groceries {

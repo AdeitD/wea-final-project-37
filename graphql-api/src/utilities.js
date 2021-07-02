@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 
-const API_URL = 'https://wea-grocery-rest-api.herokuapp.com/api/v1';
+// commented url was used for Heroku deployment
+// const API_URL = 'https://wea-grocery-rest-api.herokuapp.com/api/v1';
+const API_URL = 'http://localhost:4000/api/v1';
 
 /**
  * Fetches from a URL and promises the result as a JSON or Error object

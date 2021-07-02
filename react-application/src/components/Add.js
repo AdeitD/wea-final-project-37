@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import { Dropdown, DropdownButton, Button, ButtonGroup, FormControl, InputGroup, Alert } from "react-bootstrap";
 import { toast } from 'react-toastify';
+import { GQL_API } from '../resources/constants';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -16,7 +17,6 @@ function Add() {
     }
 
     const handleAddNew = () => {
-        const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`;
         const GQL_MUTATION = `
             mutation ($name: String!, $category: String!) {
                 createGrocery (input:{name: $name, category: $category}) {

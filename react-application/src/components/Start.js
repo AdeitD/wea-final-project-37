@@ -3,6 +3,7 @@ import { Accordion, Card, Button, FormControl, InputGroup } from "react-bootstra
 import StartList from './StartList';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GQL_API } from '../resources/constants';
 
 const alreadyAdded = [];
 
@@ -32,7 +33,6 @@ const Start = ({ newItem }) => {
     setGroceryName(event.target.value);//takes value entered on site, sets variable to it
   }
 
-  const GQL_API = `https://wea-grocery-graphql-api.herokuapp.com`;
     const GQL_QUERY = `
         query ($name: String!) {
           grocery (name: $name){
