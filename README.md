@@ -4,7 +4,7 @@ Grocery List is an innovative, organizational concept designed to optimize a gro
 
 ## Installation
 
-Grocery List is currently live on Heroku at [https://wea-grocery-list.herokuapp.com/](https://wea-grocery-list.herokuapp.com/).
+Grocery List is live on Heroku for the first 3 weeks of each month at [https://wea-grocery-list.herokuapp.com/](https://wea-grocery-list.herokuapp.com/).
 
 Alternatively, for a local installation, download the source code and follow the steps below. Be aware that the source code includes only a small sample of groceries, so the full selection available on the live app will not be present.
 
